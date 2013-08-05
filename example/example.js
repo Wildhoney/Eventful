@@ -1,4 +1,4 @@
-(function(eventful) {
+function Main(eventful) {
 
     var nameSetter = {
 
@@ -17,19 +17,24 @@
     };
 
     var nameGetter = {
-      
+
         get: function(value) {
             var strong          = document.querySelector('strong.name');
             strong.innerHTML    = value;
         },
 
         registerSubscribeEvent: function() {
+            console.log(eventful);
             eventful.subscribe(nameGetter, 'get', 'name-changed');
         }
 
     };
 
     nameSetter.registerClickEvent();
-    nameSetter.registerSubscribeEvent();
+    nameGetter.registerSubscribeEvent();
 
-})(window.Eventful);
+};
+
+window.addEventListener('DOMContentLoaded', function() {
+    window.Main(window.eventful);
+}, false);

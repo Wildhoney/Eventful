@@ -6,14 +6,6 @@
 Eventful.Subscriber = {
 
     /**
-     * @property _map
-     * @type {Object}
-     * @default {}
-     * @private
-     */
-    _registry: {},
-
-    /**
      * @method subscribe
      * @param scope {Object}
      * @param method {String}
@@ -22,16 +14,16 @@ Eventful.Subscriber = {
      */
     subscribe: function(scope, method, token) {
 
-        if (!this._registry[token]) {
+        if (!this._subscriptions[token]) {
 
             // If the token doesn't already exist in the registry, then we need
             // to initialise it by creating an empty array.
-            this._registry[token] = [];
+            this._subscriptions[token] = [];
 
         }
 
         // Push the new subscription into the registry.
-        this._registry[token].push({ scope: scope, method: method });
+        this._subscriptions[token].push({ scope: scope, method: method });
 
     },
 
@@ -44,7 +36,7 @@ Eventful.Subscriber = {
      */
     unsubscribe: function(scope, method, token) {
 
-        delete this._registry[token];
+        delete this._subscriptions[token];
 
     },
 
@@ -60,7 +52,7 @@ Eventful.Subscriber = {
         // Produce an object of the arguments, as well as their name.
         var args = { scope: scope, method: method, token: token };
 
-        return this._registry.filter(function(subscription) {
+        return this._subscriptions.filter(function(subscription) {
 
             // Iterate over all of the arguments. If the argument is defined then we'll
             // ensure the returned subscriptions match that/those argument(s).
