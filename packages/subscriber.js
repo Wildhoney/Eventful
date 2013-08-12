@@ -12,7 +12,7 @@ Eventful.Subscriber = {
      * @param token {String}
      * @return {Boolean}
      */
-    subscribe: function(scope, method, token) {
+    subscribe: function subscribe(scope, method, token) {
 
         if (!this._subscriptions[token]) {
 
@@ -24,6 +24,7 @@ Eventful.Subscriber = {
 
         // Push the new subscription into the registry.
         this._subscriptions[token].push({ scope: scope, method: method });
+        return true;
 
     },
 
@@ -34,9 +35,10 @@ Eventful.Subscriber = {
      * @param token {String}
      * @return {Boolean}
      */
-    unsubscribe: function(scope, method, token) {
+    unsubscribe: function unsubscribe(scope, method, token) {
 
         delete this._subscriptions[token];
+        return true;
 
     },
 
@@ -47,7 +49,7 @@ Eventful.Subscriber = {
      * @param token {String}
      * @return {Object}
      */
-    getSubscriptions: function(scope, method, token) {
+    getSubscriptions: function getSubscriptions(scope, method, token) {
 
         // Produce an object of the arguments, as well as their name.
         var args = { scope: scope, method: method, token: token };
