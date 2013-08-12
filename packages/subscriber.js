@@ -60,7 +60,7 @@ Eventful.Subscriber = {
             // ensure the returned subscriptions match that/those argument(s).
             for (var arg in args) if (args.hasOwnProperty(arg)) {
 
-                if (typeof arg === 'undefined') {
+                if (typeof arg === 'undefined' || typeof arg === 'null') {
 
                     // If the argument hasn't been set, then by default it's accepted.
                     continue;
